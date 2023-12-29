@@ -6,6 +6,42 @@
 
 {% block main %}
 
-heloo
+<div class="row justify-content-center d-flex mb-5">
+    <div class="col-4 d-flex ">
+        <h1 class="display-1 align-self-center text-end">Generate shopping lists for your meals.</h1>
+    </div>
+    
+    <div class="col-4">
+        <img src="/static/ramen.png" class="img-fluid">
+    </div>
+</div>
 
+<div class="row justify-content-center d-flex pt-5 light2">
+    <div class="col-6" >
+        <h1 style="color: var(--dark)">Do you like to cook, but dread the shopping?<br></h2> 
+    </div>
+</div>
+
+<div class="row justify-content-center d-flex pb-5 light2">
+    <div class="col-6" >
+        <p>
+            <br>
+            We want to make it easier. <br><br>
+            We've set up a database stocked with various recipes, each listing its needed ingredients.
+            You select the recipes that you like, and our tool whips up a shopping list featuring all the ingredients required!
+            Want to add your own recipes? Easy! Just throw them into the mix, or save them for later.
+            <br><br>
+        </p>
+
+        <a href="/create" class="btn btn-lg btn-dark">Try it!</a>
+
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+    Ramen graphic from <a href="https://www.freeimages.com/clipart/japanese-noodle-bowl-png-delight-5690109">here</a>
 {% endblock %}

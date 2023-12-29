@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Ingredients
+{% endblock %}
+
+{% block main %}
+
+<div class="row justify-content-center d-flex mb-5">
+
+</div>
+
+<div class="row d-flex pt-5 mt-5">
+    <div class="col-4">
+        <h1 class="display-1 text-end">Browse</h1> 
+    </div>
+
+    <div class="col-8 light2">
+        
+        <div class="chevron" data-bs-toggle="collapse" href="#browse" role="button" aria-expanded="false" aria-controls="browse">
+            <h1 class="display-1 text-start">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5rem" height="5rem" stroke="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <polyline style="fill:none;stroke-width:1" points="2,5 8,10 14,5"></polyline>
+                </svg>
+            </h1>
+        </div>
+
+        <div class="container collapse" id="browse">
+            <div class="card-body table-responsive">
+                <table class="table table-borderless text-end">
+                    <tr>
+                        <th class="text-start">Name</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Add to cart</th>
+                    </tr>
+
+                    {% for product in products %}
+                    <tr>
+                        <td class="text-start">{{ product.name }}</td>
+                        <td>[quantity]</td>
+                        <td>{{ product.unit }}</td>
+                        <td>[add]</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+
+<div class="row d-flex">
+    <div class="col-4">
+        <h1 class="display-1 text-end">Add</h2> 
+    </div>
+
+    <div class="col-8 light2 vh-100">
+
+        <div class="chevron" data-bs-toggle="collapse" href="#add" role="button" aria-expanded="false" aria-controls="add">
+            <h1 class="display-1 text-start">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5rem" height="5rem" stroke="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                    <polyline style="fill:none;stroke-width:1" points="2,5 8,10 14,5"></polyline>
+                </svg>
+            </h1>
+        </div>
+
+        <div class="container collapse" id="add">
+            <div class="card-body">
+              Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
