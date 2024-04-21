@@ -6,6 +6,56 @@
     --emphasis: #ad0b36;
   }
 
+#bootstrap-overrides {
+    --bs-body-bg: #ecd8b2ff;
+    --bs-focus-ring-opacity: 0.25;
+    --bs-focus-ring-color: rgba(173, 11, 54, .5);
+    --bs-focus-ring-blur: 0;
+    --bs-table-color-state: #ecd8b2ff;
+    --bs-body-color: #17150cff;
+    --bs-body-font-family: 'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-sans-serif: 'Manrope', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-card-color: #17150cff;
+}
+
+.form-check-input {
+    --bs-form-check-bg: #af8657ff;
+    border: 0;
+}
+
+.form-check-input[type="checkbox"] {
+    border-radius: 0;
+    --bs-focus-ring-color: #493c29ff;
+  }
+
+.form-check-input:checked {
+    background-color: var(--emphasis);
+    border-color: var(--emphasis);
+}
+
+.pagination {
+    --bs-pagination-bg: var(--dark2);
+	--bs-pagination-color: var(--light);
+	--bs-pagination-border-color: var(--light2);
+	--bs-pagination-border-radius: 0;
+    --bs-pagination-focus-bg: var(--emphasis);
+	--bs-pagination-focus-color: var(--light);
+	--bs-pagination-focus-box-shadow: var(--dark2);
+	--bs-pagination-active-color: var(--light);
+	--bs-pagination-active-bg: var(--dark);
+	--bs-pagination-active-border-color: var(--dark);
+    --bs-pagination-disabled-color: var(--dark);
+    --bs-pagination-disabled-bg: var(--light2);
+    --bs-pagination-disabled-border-color: var(--dark);
+	list-style: none;
+}
+
+.page-link:hover {
+    --bs-pagination-hover-color: var(--light);
+	--bs-pagination-hover-border-color: var(--emphasis);
+    --bs-pagination-hover-bg: var(--emphasis);
+}
+
 body {
     background-color: var(--light);
     color: var(--dark);
@@ -53,9 +103,11 @@ h1 {
   color: var(--light);
   border: none;
   border-radius: 0;
-  background-color: var(--dark);
-  --bs-btn-active-bg: var(--dark2);
-  --bs-btn-disabled-bg: var(--dark2);
+  background-color: var(--dark2);
+  --bs-btn-active-bg: var(--emphasis);
+  --bs-btn-disabled-bg: var(--light2);
+  --bs-btn-disabled-color: var(--dark);
+  --bs-btn-disabled-border: var(--dark);
 }
 
 .btn-dark:hover {
@@ -70,21 +122,59 @@ h1 {
     background-color: var(--light2);
 }
 
-.bi{
+.chevron{
     transition: transform 0.3s;
 }
 
 .chevron[aria-expanded="true"]{
-    .bi{
-        transform: rotateX(180deg);
-    }
+    transform: rotateX(180deg);
 }
 
 table tr td, table tr th{
     background-color: transparent !important;
+    color: var(--dark) !important;
 }
 
-table tr:hover {
+table tbody tr:hover {
     background-color: var(--light2) !important;
     filter: brightness(120%);
 }
+
+.form-control {
+    border-radius: 0;
+    border-width: 0;
+}
+
+.form-control:focus {
+	outline: 0;
+	box-shadow: var(--bs-focus-ring-x,0) var(--bs-focus-ring-y,0) var(--bs-focus-ring-blur,0) var(--bs-focus-ring-width) var(--bs-focus-ring-color);
+  }
+
+.form-check .form-check-input {
+	float: none;
+	margin-left: -1.5em;
+}
+
+.col-form-label {
+    font-weight: 600;
+}
+
+.form-check-input[type="radio"] {
+	--bs-form-check-bg: var(--light);
+    --bs-focus-ring-color: #493c29ff;
+}
+
+.form-select {
+	border: 0;
+    border-radius: 0;
+}
+
+.alert-light {
+    --bs-light-text-emphasis: var(--dark2);
+    --bs-light-bg-subtle: #fff;
+    border: none;
+    border-radius: 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+

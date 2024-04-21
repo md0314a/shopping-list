@@ -6,9 +6,19 @@ from flask_bcrypt import Bcrypt
 import sqlite3
 from flask import g
 
+from jinja2 import Environment, PackageLoader, select_autoescape
+from jinja2.filters import FILTERS
+
 app = Flask(__name__)
 
 DATABASE = 'db.db'
+
+@app.template_filter('defaultQuantity')
+def defaultQuantity(unit):
+    if unit in ['ml', 'g']:
+        return 100
+    else:
+        return 1
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -37,20 +47,60 @@ def index():
 
 @app.route("/carts")
 def create():
-    return render_template('create.html')
+    return render_template('carts.html')
 
-
-#SELECT MIN(id) AS id, title
-#FROM tbl_countries
-#GROUP BY title
 
 @app.route("/ingredients", methods=('GET', 'POST'))
 def ingredients():
-    if request.method == 'GET': #browsing products
-        products = query_db('SELECT product_id, name, unit FROM products GROUP BY name')
-        return render_template('ingredients.html', products=products)
 
-    return render_template('ingredients.html')
+    message = ""
+    show = ""
+
+    if request.method == 'POST': 
+        if not (
+            request.form.get("name") 
+            and request.form.get("unit") 
+            and request.form.get("visibility")
+            and (request.form.get("category") or request.form.get("categoryNew"))):
+            message = "Please fill all of the neccessary fields!"
+
+        else:
+            rows = query_db('SELECT * FROM products WHERE name = ? COLLATE NOCASE', (request.form.get("name"),))
+
+            if len(rows):
+                message = f"{request.form.get('name').capitalize()} already exists in the list of products!"
+
+            else:
+                #TODO get author id - temporarily set as 1 (me)
+                author = 1
+
+                if request.form.get("category"):
+                    category = request.form.get("category")
+                else:
+                    category = request.form.get("categoryNew")
+
+                if request.form.get("visibility") == 'public':
+                    visibility = 1
+                else:
+                    visibility = 0
+
+                db = get_db()
+                c = db.cursor()
+                c.execute('INSERT INTO products(name, unit, category, author_id, date_added, public) VALUES (?, ?, ?, ?, datetime(), ?)',
+                (request.form.get("name"), request.form.get("unit"), category, author, visibility))
+
+                #query_db('INSERT INTO products(name, unit, category, author_id, date_added, public) VALUES (?, ?, ?, ?, datetime(), ?)',
+                #(request.form.get("name"), request.form.get("unit"), category, author, visibility))
+                db.commit()
+
+                message = f"Added {request.form.get('name')} to the list of products!"
+
+    #render products table
+    products = query_db('SELECT product_id, name, category, unit FROM products GROUP BY name')
+    categories = query_db('SELECT DISTINCT category FROM products')
+
+    return render_template('ingredients.html', products=products, categories=categories, message=message)
+
 
 @app.route("/recipes")
 def recipes():
